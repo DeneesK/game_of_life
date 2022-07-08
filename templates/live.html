@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main_btn">
+    <a class="btn btn-warning home" href="{{ url_for ('index') }}">На главную</a>
+</div>
+    
+    <div class="counter">{{ life.counter }}</div>
+    <table class="world">
+        {% for i in range(game.world|length) %}
+            <tr>
+                {% for j in range(game.world[i]|length) %}
+                    {% if game.world[i][j] %}
+                        <td class="cell living-cell"></td>
+                    {% elif game.world[i][j] == 0 and game.old_world[i][j] == 1 %}
+                        <td class="cell dead-cell"></td>
+                    {% else %}
+                        <td class="cell"></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+
+{% block scripts %}
+{% if life.counter < 15 %}
+<link href="{{  url_for('static', filename='style.css')  }}" rel="stylesheet">
+    <script>
+        setInterval (() => window.location.reload(), 1000);
+    </script>
+{% else %}
+{% if game.world != game.old_world %}
+<link href="{{  url_for('static', filename='style.css')  }}" rel="stylesheet">
+    <script>
+        setInterval (() => window.location.reload(), 100);
+    </script>
+{% else %}
+<link href="{{  url_for('static', filename='style.css')  }}" rel="stylesheet">
+{% endif %}
+{% endif %}
+{% endblock %}
