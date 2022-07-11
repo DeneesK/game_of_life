@@ -10,7 +10,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/live')
-def live():
+def life_creation():
     life = GameOfLife()
     game_of_live = GameOfLife()
     if life.counter > 0:
