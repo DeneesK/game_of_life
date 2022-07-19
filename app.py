@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from game_of_life import*
+from game_of_life import GameOfLife
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/live')
-def life_creation():
+def live():
     life = GameOfLife()
     game_of_live = GameOfLife()
     if life.counter > 0:
